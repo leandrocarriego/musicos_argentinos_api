@@ -1,0 +1,24 @@
+# Archivos y directorios específicos de Python y entorno virtual
+venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+
+# Archivos y directorios específicos de tu IDE o editor de código
+.idea/
+.vscode/
+
+# Archivos y directorios específicos de registros y salida
+*.log
+*.out
+
+# Archivos y directorios específicos de dependencias
+/.venv
+/.env
+
+# Archivos y directorios específicos de tu entorno local
+app/.env
+
+# Otros archivos y directorios generados por el sistema operativo
+.DS_Store
+Thumbs.db
