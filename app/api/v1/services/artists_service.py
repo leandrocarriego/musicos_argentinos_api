@@ -1,33 +1,10 @@
-from datetime import datetime
 from core.db_connection import get_collection_db
 from api.v1.models.Artist_model import Artist
 from api.v1.schemas.Artist_schemas import ArtistCreate, ArtistUpdate, ArtistResponse
 from bson import ObjectId
 
-# def validate_date(value: str) -> date:
-#     return datetime.strptime(value, "%d/%m/%Y").date()
 
-async def create_artist_service(artist_data: ArtistCreate) -> ArtistResponse:
-    try:
-        collection = await get_collection_db("artists")
-
-        # date_object = datetime.strptime(artist_data.birthdate, '%m-%d-%Y').date()
-
-        artist = Artist(
-            name = artist_data.name,
-            birthdate = artist_data.birthdate
-        )
-
-        new_artist = await collection.insert_one(artist.dict())
-
-        artist_id = str(new_artist.inserted_id)
-
-        return ArtistResponse(id=artist_id, **artist.dict())
-
-    except Exception as e:
-        raise Exception(f"Error creating artist: {str(e)}")
-
-
+# GET services
 async def get_all_artists_service() -> list[ArtistResponse]:
     try:
         collection = await get_collection_db("artists")
@@ -40,7 +17,7 @@ async def get_all_artists_service() -> list[ArtistResponse]:
         return artists
     
     except Exception as e:
-        raise Exception(f"Error retrieving artists: {str(e)}")
+        raise Exception(e)
 
 
 async def get_artist_by_id_service(artist_id: str) -> ArtistResponse:
@@ -58,6 +35,27 @@ async def get_artist_by_id_service(artist_id: str) -> ArtistResponse:
         raise Exception(f"Error retrieving artist with the id: {artist_id}. {str(e)}")
 
 
+# CREATE services
+async def create_artist_service(artist_data: ArtistCreate) -> ArtistResponse:
+    try:
+        collection = await get_collection_db("artists")
+
+        artist = Artist(
+            name = artist_data.name,
+            birthdate = artist_data.birthdate
+        )
+
+        new_artist = await collection.insert_one(artist.dict())
+
+        artist_id = str(new_artist.inserted_id)
+
+        return ArtistResponse(id=artist_id, **artist.dict())
+
+    except Exception as e:
+        raise Exception(f"Error creating artist: {str(e)}")
+    
+
+# UPDATE services 
 async def update_artist_service(artist_id: str, artist_data: ArtistUpdate) -> ArtistResponse:
     try:
         collection = await get_collection_db("artists")
@@ -83,6 +81,7 @@ async def update_artist_service(artist_id: str, artist_data: ArtistUpdate) -> Ar
         raise Exception(f"Error editing artist with the id: {artist_id}. {str(e)}")
 
 
+# DELETE services
 async def delete_artist_service(artist_id: str) -> dict[str, str]:
     try:
         collection = await get_collection_db("artists")

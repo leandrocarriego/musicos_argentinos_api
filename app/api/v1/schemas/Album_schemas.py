@@ -3,21 +3,22 @@ from pydantic import BaseModel
 from api.v1.schemas.Artist_schemas import ArtistResponse
 
 
-
-class AlbumCreate(BaseModel):
+class Base(BaseModel):
     name: str
     year: str
+
+
+class AlbumCreate(Base):
     artist_id: str
 
 
-class AlbumUpdate(BaseModel):
-    name: str
-    year: str
+class AlbumUpdate(Base):
     artist_id: str
 
 
-class AlbumResponse(BaseModel):
+class AlbumByArtist(Base):
     id: str
-    name: str
-    year: str
+
+
+class AlbumResponse(AlbumByArtist):
     artist: ArtistResponse

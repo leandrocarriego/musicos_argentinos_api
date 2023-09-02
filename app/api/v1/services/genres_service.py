@@ -4,22 +4,7 @@ from api.v1.schemas.Genre_schemas import GenreCreate, GenreUpdate, GenreResponse
 from bson import ObjectId
 
 
-async def create_genre_service(genre_data: GenreCreate) -> GenreResponse:
-    try:
-        collection = await get_collection_db("genres")
-
-        genre = Genre(name=genre_data.name)
-
-        new_genre = await collection.insert_one(genre.dict())
-
-        genre_id = str(new_genre.inserted_id)
-
-        return GenreResponse(id=genre_id, **genre.dict())
-
-    except Exception as e:
-        raise Exception(f"Error creating genre: {str(e)}")
-
-
+# GET services
 async def get_all_genres_service() -> list[GenreResponse]:
     try:
         collection = await get_collection_db("genres")
@@ -32,7 +17,7 @@ async def get_all_genres_service() -> list[GenreResponse]:
         return genres
 
     except Exception as e:
-        raise Exception(f"Error retrieving genres: {str(e)}")
+        raise Exception(e)
 
 
 async def get_genre_by_id_service(genre_id: str) -> GenreResponse:
@@ -50,6 +35,24 @@ async def get_genre_by_id_service(genre_id: str) -> GenreResponse:
         raise Exception(f"Error retrieving genre with the id: {genre_id}. {str(e)}")
 
 
+# CREATE services
+async def create_genre_service(genre_data: GenreCreate) -> GenreResponse:
+    try:
+        collection = await get_collection_db("genres")
+
+        genre = Genre(name=genre_data.name)
+
+        new_genre = await collection.insert_one(genre.dict())
+
+        genre_id = str(new_genre.inserted_id)
+
+        return GenreResponse(id=genre_id, **genre.dict())
+
+    except Exception as e:
+        raise Exception(f"Error creating genre: {str(e)}")
+
+
+# UPDATE services
 async def update_genre_service(genre_id: str, genre_data: GenreUpdate) -> GenreResponse:
     try:
         collection = await get_collection_db("genres")
@@ -74,6 +77,7 @@ async def update_genre_service(genre_id: str, genre_data: GenreUpdate) -> GenreR
         raise Exception(f"Error editing genre with the id: {genre_id}. {str(e)}")
 
 
+# DELETE services
 async def delete_genre_service(genre_id: str) -> dict[str, str]:
     try:
         collection = await get_collection_db("genres")

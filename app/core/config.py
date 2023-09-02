@@ -4,10 +4,6 @@ from pydantic import BaseSettings
 class Settings(BaseSettings):
     APP_HOST: str
     APP_PORT: int
-    MONGODB_HOST: str
-    MONGODB_PORT: str
-    MONGO_INITDB_ROOT_USERNAME: str
-    MONGO_INITDB_ROOT_PASSWORD: str
     MONGO_DB_NAME: str
     DB_URI: str
     SECRET_KEY: str

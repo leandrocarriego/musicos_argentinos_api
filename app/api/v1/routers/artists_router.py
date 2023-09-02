@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from api.v1.schemas.Artist_schemas import ArtistCreate, ArtistUpdate, ArtistResponse
+from api.v1.schemas.Album_schemas import AlbumByArtist
 from api.v1.services.artists_service import (
     create_artist_service,
     get_all_artists_service,
@@ -7,11 +8,13 @@ from api.v1.services.artists_service import (
     update_artist_service,
     delete_artist_service,
 )
+from api.v1.services.albums_service import get_albums_by_artist_service
 
 
 router = APIRouter(prefix="/artists")
 
-@router.post("/", response_model=ArtistResponse)
+# POST routes
+@router.post("/", status_code=201, response_model=ArtistResponse)
 async def create_artist_route(artist_data: ArtistCreate) -> ArtistResponse:
     try:
         return await create_artist_service(artist_data)
@@ -20,25 +23,36 @@ async def create_artist_route(artist_data: ArtistCreate) -> ArtistResponse:
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.get("/", response_model=list[ArtistResponse])
+# GET routes
+@router.get("/", status_code=200, response_model=list[ArtistResponse])
 async def get_all_artists_route() -> list[ArtistResponse]:
     try:
         return await get_all_artists_service()
 
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=404, detail=str(e))
 
 
-@router.get("/{artist_id}", response_model=ArtistResponse)
+@router.get("/{artist_id}", status_code=200, response_model=ArtistResponse)
 async def get_one_artist_route(artist_id: str) -> ArtistResponse:
     try:
         return await get_artist_by_id_service(artist_id)
 
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=404, detail=str(e))
 
 
-@router.put("/{artist_id}", response_model=ArtistResponse)
+@router.get("/{artist_id}/albums", status_code=200, response_model=list[AlbumByArtist])
+async def get_one_artist_route(artist_id: str) -> list[AlbumByArtist]:
+    try:
+        return await get_albums_by_artist_service(artist_id)
+
+    except Exception as e:
+        raise HTTPException(status_code=404, detail=str(e))
+
+
+# PUT routes
+@router.put("/{artist_id}", status_code=201, response_model=ArtistResponse)
 async def udpate_artist_route(artist_id: str, artist_data: ArtistUpdate) -> ArtistResponse:
     try:
         return await update_artist_service(artist_id, artist_data)
@@ -47,7 +61,8 @@ async def udpate_artist_route(artist_id: str, artist_data: ArtistUpdate) -> Arti
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.delete("/{artist_id}")
+# DELETE routes
+@router.delete("/{artist_id}", status_code=200)
 async def delete_artist_route(artist_id: str) -> dict[str, str]:
     try:
         return await delete_artist_service(artist_id)

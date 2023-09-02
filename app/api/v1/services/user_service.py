@@ -1,8 +1,31 @@
-
+from passlib.context import CryptContext
 from core.db_connection import connect_to_database
-from api.v1.schemas.User import UserCreate, UserResponse, User
+from api.v1.schemas.User import UserCreate, UserResponse
 
+
+# GET services
+async def get_user(username: str):
+    try:
+        database = await connect_to_database()
+        collection = database["users"]
+
+        user = await collection.find_one({"username": username})
+
+        if user:
+            return UserResponse(id=str(user["_id"]), **user)
+
+        else:
+            raise Exception("User not found")
+
+    except Exception as e:
+        raise Exception(
+            f"Error retrieving user with the username: {username}. {str(e)}"
+        )
+
+
+# CREATE services
 async def create_user(user_data: UserCreate) -> UserResponse:
+    bycrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
     try:
         database = await connect_to_database()
         collection = database["users"]
@@ -25,22 +48,3 @@ async def create_user(user_data: UserCreate) -> UserResponse:
 
     except Exception as e:
         raise Exception(f"Error creating user: {str(e)}")
-
-
-async def get_user(username: str):
-    try:
-        database = await connect_to_database()
-        collection = database["users"]
-
-        user = await collection.find_one({"username": username})
-
-        if user:
-            return UserResponse(id=str(user["_id"]), **user)
-
-        else:
-            raise Exception("User not found")
-
-    except Exception as e:
-        raise Exception(
-            f"Error retrieving user with the username: {username}. {str(e)}"
-        )
