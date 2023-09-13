@@ -1,14 +1,14 @@
 from fastapi import APIRouter, HTTPException
-from api.v1.schemas.Genre_schemas import GenreCreate, GenreUpdate, GenreResponse
-from api.v1.schemas.Songs_schemas import SongByGenre
-from api.v1.services.genres_service import (
+from app.api.v1.schemas.Genre_schemas import GenreCreate, GenreUpdate, GenreResponse
+from app.api.v1.schemas.Songs_schemas import SongByGenre
+from app.api.v1.services.genres_service import (
     create_genre_service,
     get_all_genres_service,
     get_genre_by_id_service,
     update_genre_service,
     delete_genre_service,
 )
-from api.v1.services.songs_service import get_songs_by_genre_service
+from app.api.v1.services.songs_service import get_songs_by_genre_service
 
 
 router = APIRouter(prefix="/genres")

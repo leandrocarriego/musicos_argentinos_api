@@ -4,10 +4,10 @@ from fastapi import APIRouter, Depends, HTTPException, Response
 from fastapi.responses import RedirectResponse
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from starlette import status
-from core.config import settings
-from api.v1.schemas.User import UserCreate, UserResponse
-from api.v1.schemas.Token import Token
-from auth import authenticate_user, create_access_token, get_user, create_user
+from app.core.config import settings
+from app.api.v1.schemas.User import UserCreate, UserResponse
+from app.api.v1.schemas.Token import Token
+from app.auth import authenticate_user, create_access_token, get_user, create_user
 
 
 router = APIRouter(prefix="/auth", tags=["auth"])

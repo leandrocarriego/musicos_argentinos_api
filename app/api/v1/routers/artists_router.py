@@ -1,15 +1,15 @@
 from fastapi import APIRouter, HTTPException
-from api.v1.models.Artist_model import Artist
-from api.v1.schemas.Artist_schemas import ArtistCreate, ArtistUpdate, ArtistResponse
-from api.v1.schemas.Album_schemas import AlbumByArtist
-from api.v1.services.artists_service import (
+from app.api.v1.models.Artist_model import Artist
+from app.api.v1.schemas.Artist_schemas import ArtistCreate, ArtistUpdate, ArtistResponse
+from app.api.v1.schemas.Album_schemas import AlbumByArtist
+from app.api.v1.services.artists_service import (
     create_artist_service,
     get_all_artists_service,
     get_artist_by_id_service,
     update_artist_service,
     delete_artist_service,
 )
-from api.v1.services.albums_service import get_albums_by_artist_service
+from app.api.v1.services.albums_service import get_albums_by_artist_service
 
 
 router = APIRouter(prefix="/artists")

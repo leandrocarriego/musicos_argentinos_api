@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
-from api.v1.schemas.Songs_schemas import SongCreate, SongUpdate, SongResponse
-from api.v1.services.songs_service import (
+from app.api.v1.schemas.Songs_schemas import SongCreate, SongUpdate, SongResponse
+from app.api.v1.services.songs_service import (
     create_song_service,
     get_all_songs_service,
     get_song_by_id_service,

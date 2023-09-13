@@ -1,6 +1,6 @@
-from core.db_connection import get_collection_db
-from api.v1.models.Song_model import Song
-from api.v1.schemas.Songs_schemas import SongCreate, SongUpdate, SongByGenre, SongByAlbum, SongResponse
+from app.core.db_connection import get_collection_db
+from app.api.v1.models.Song_model import Song
+from app.api.v1.schemas.Songs_schemas import SongCreate, SongUpdate, SongByGenre, SongByAlbum, SongResponse
 from .genres_service import get_genre_by_id_service
 from .albums_service import get_album_by_id_service
 from bson import ObjectId

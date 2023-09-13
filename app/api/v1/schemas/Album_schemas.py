@@ -1,6 +1,6 @@
 from typing import List
 from pydantic import BaseModel
-from api.v1.schemas.Artist_schemas import ArtistResponse
+from app.api.v1.schemas.Artist_schemas import ArtistResponse
 
 
 class Base(BaseModel):

@@ -1,6 +1,6 @@
-from core.db_connection import get_collection_db
-from api.v1.models.Genre_model import Genre
-from api.v1.schemas.Genre_schemas import GenreCreate, GenreUpdate, GenreResponse
+from app.core.db_connection import get_collection_db
+from app.api.v1.models.Genre_model import Genre
+from app.api.v1.schemas.Genre_schemas import GenreCreate, GenreUpdate, GenreResponse
 from bson import ObjectId
 
 

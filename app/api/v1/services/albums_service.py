@@ -1,6 +1,6 @@
-from core.db_connection import get_collection_db
-from api.v1.models.Album_model import Album
-from api.v1.schemas.Album_schemas import AlbumCreate, AlbumUpdate, AlbumByArtist, AlbumResponse
+from app.core.db_connection import get_collection_db
+from app.api.v1.models.Album_model import Album
+from app.api.v1.schemas.Album_schemas import AlbumCreate, AlbumUpdate, AlbumByArtist, AlbumResponse
 from .artists_service import get_artist_by_id_service
 from bson import ObjectId
 

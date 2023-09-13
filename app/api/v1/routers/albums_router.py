@@ -1,14 +1,14 @@
 from fastapi import APIRouter, HTTPException
-from api.v1.schemas.Album_schemas import AlbumCreate, AlbumUpdate, AlbumResponse
-from api.v1.schemas.Songs_schemas import SongByAlbum
-from api.v1.services.albums_service import (
+from app.api.v1.schemas.Album_schemas import AlbumCreate, AlbumUpdate, AlbumResponse
+from app.api.v1.schemas.Songs_schemas import SongByAlbum
+from app.api.v1.services.albums_service import (
     create_album_service,
     get_all_albums_service,
     get_album_by_id_service,
     update_album_service,
     delete_album_service,
 )
-from api.v1.services.songs_service import get_songs_by_album_service
+from app.api.v1.services.songs_service import get_songs_by_album_service
 
 
 router = APIRouter(prefix="/albums")

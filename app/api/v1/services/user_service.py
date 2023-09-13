@@ -1,6 +1,6 @@
 from passlib.context import CryptContext
-from core.db_connection import connect_to_database
-from api.v1.schemas.User import UserCreate, UserResponse
+from app.core.db_connection import connect_to_database
+from app.api.v1.schemas.User import UserCreate, UserResponse
 
 
 # GET services

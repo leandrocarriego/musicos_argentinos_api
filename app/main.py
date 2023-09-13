@@ -1,9 +1,9 @@
 from fastapi import FastAPI
-from api.v1.routers.home_router import router as home_router
-from api.v1.routers.auth_router import router as auth_router
-from api.v1.routers import router as v1_router
-from core.db_connection import db
-from core.cors import add_cors_middleware
+from app.api.v1.routers.home_router import router as home_router
+from app.api.v1.routers.auth_router import router as auth_router
+from app.api.v1.routers import router as v1_router
+from app.core.db_connection import db
+from app.core.cors import add_cors_middleware
 
 app = FastAPI()
 

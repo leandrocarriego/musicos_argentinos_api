@@ -5,12 +5,12 @@ from fastapi.responses import RedirectResponse
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from pydantic import BaseModel
 from starlette import status
-from core.config import settings
-from core.db_connection import connect_to_database
+from app.core.config import settings
+from app.core.db_connection import connect_to_database
 from passlib.context import CryptContext
 from jose import jwt, JWTError
-from api.v1.schemas.Token import Token
-from api.v1.schemas.User import UserCreate, UserResponse, User
+from app.api.v1.schemas.Token import Token
+from app.api.v1.schemas.User import UserCreate, UserResponse, User
 
 # router = APIRouter(prefix="/auth", tags=["auth"])
 

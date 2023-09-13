@@ -1,7 +1,7 @@
 from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException
-from api.v1.schemas.User import User
-from auth import get_current_active_user
+from app.api.v1.schemas.User import User
+from app.auth import get_current_active_user
 
 router = APIRouter(prefix="/users", tags=["users"])
 

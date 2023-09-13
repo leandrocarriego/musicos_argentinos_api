@@ -1,7 +1,7 @@
-from core.db_connection import get_collection_db
-from core.db_connection import db
-from api.v1.models.Artist_model import Artist
-from api.v1.schemas.Artist_schemas import ArtistCreate, ArtistUpdate, ArtistResponse
+from app.core.db_connection import get_collection_db
+from app.core.db_connection import db
+from app.api.v1.models.Artist_model import Artist
+from app.api.v1.schemas.Artist_schemas import ArtistCreate, ArtistUpdate, ArtistResponse
 from bson import ObjectId
 
 
