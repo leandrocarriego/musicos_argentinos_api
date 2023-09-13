@@ -3,6 +3,8 @@ from fastapi import FastAPI
 
 origins = [
     "vercel.app",
+    "musicos-argentinos-fastapi.vercel.app",
+    "*",
 ]
 
 def add_cors_middleware(app: FastAPI):
