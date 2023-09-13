@@ -1,6 +1,16 @@
 from motor.motor_asyncio import AsyncIOMotorClient
-from core.config import settings
+from .config import settings
 
+class Database:
+    def __init__(self) -> None:
+        try:
+            self.client = AsyncIOMotorClient(settings.DB_URI)
+            self.db = self.client[settings.MONGO_DB_NAME]
+            print("Conexión exitosa a la base de datos.")
+        except Exception as e:
+            print(f"Error al conectar a la base de datos: {str(e)}")
+
+db = Database().db
 
 async def connect_to_database():
     try:

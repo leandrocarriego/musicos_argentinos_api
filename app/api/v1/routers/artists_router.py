@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException
+from api.v1.models.Artist_model import Artist
 from api.v1.schemas.Artist_schemas import ArtistCreate, ArtistUpdate, ArtistResponse
 from api.v1.schemas.Album_schemas import AlbumByArtist
 from api.v1.services.artists_service import (
@@ -24,8 +25,8 @@ async def create_artist_route(artist_data: ArtistCreate) -> ArtistResponse:
 
 
 # GET routes
-@router.get("/", status_code=200, response_model=list[ArtistResponse])
-async def get_all_artists_route() -> list[ArtistResponse]:
+@router.get("/", status_code=200, response_model=list[Artist])
+async def get_all_artists_route() -> list[Artist]:
     try:
         return await get_all_artists_service()
 

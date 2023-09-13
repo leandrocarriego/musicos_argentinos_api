@@ -1,18 +1,20 @@
 from core.db_connection import get_collection_db
+from core.db_connection import db
 from api.v1.models.Artist_model import Artist
 from api.v1.schemas.Artist_schemas import ArtistCreate, ArtistUpdate, ArtistResponse
 from bson import ObjectId
 
 
-# GET services
-async def get_all_artists_service() -> list[ArtistResponse]:
-    try:
-        collection = await get_collection_db("artists")
+collection = db["artists"]
 
-        artists = []
-        async for document in collection.find():
-            artist = ArtistResponse(id=str(document["_id"]), **document)
-            artists.append(artist)
+# GET services
+async def get_all_artists_service() -> list[Artist]:
+    try:
+        
+        artists = await collection.find().to_list(length=None)
+        # for document in artists:
+        #     artist = ArtistResponse(id=str(document["_id"]), **document)
+        #     artists.append(artist)
 
         return artists
     

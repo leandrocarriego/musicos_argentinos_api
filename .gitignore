@@ -22,3 +22,4 @@ app/.env
 # Otros archivos y directorios generados por el sistema operativo
 .DS_Store
 Thumbs.db
+.vercel
