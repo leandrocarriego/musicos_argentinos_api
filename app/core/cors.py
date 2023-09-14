@@ -2,8 +2,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
 
 origins = [
-    "vercel.app",
-    "musicos-argentinos-fastapi.vercel.app",
+    ".vercel.app",
     "*",
 ]
 

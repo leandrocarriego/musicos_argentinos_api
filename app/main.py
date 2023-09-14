@@ -1,3 +1,5 @@
+import os
+import uvicorn
 from fastapi import FastAPI
 from app.api.v1.routers.home_router import router as home_router
 from app.api.v1.routers.auth_router import router as auth_router
@@ -14,3 +16,5 @@ app.include_router(v1_router)
 app.include_router(auth_router)
 app.state.database = db
 
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))
